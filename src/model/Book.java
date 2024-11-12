@@ -1,11 +1,41 @@
 package model;
 
-public class Book extends Document {
+public class Book {
+    private String title;
+    private String author;
+    private int year;
     private String isbn;
 
     public Book(String title, String author, int year, String isbn) {
-        super(title, author, year);
+        this.title = title;
+        this.author = author;
+        this.year = year;
         this.isbn = isbn;
+    }
+
+    // Getters và Setters
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getIsbn() {
@@ -18,9 +48,11 @@ public class Book extends Document {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Book{");
-        sb.append("isbn='").append(isbn).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year +
+                ", isbn='" + isbn + '\'' +
+                '}';
     }
 }

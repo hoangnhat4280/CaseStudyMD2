@@ -2,45 +2,63 @@ package view;
 
 import controller.LibraryController;
 import model.Book;
-import model.Document;
-import storage.LibraryStorage;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\nNhập từ khóa tìm kiếm : ");
-        String keyword = scanner.nextLine();
-
-        // getInstance() để lấy các đối tượng Singleton
         LibraryController libraryController = LibraryController.getInstance();
-        LibraryStorage libraryStorage = LibraryStorage.getInstance();
 
-        libraryController.addDocument(new Book("Naruto", "Kakashi", 2008, "248-0432236789"));
-        libraryController.addDocument(new Book("Haikyuu", "Shoyo", 2006, "248-0236594728"));
-        libraryController.addDocument(new Book("One Piece", "Oda", 1999, "248-0336338392"));
+        // Thêm sách mẫu
+        Book book1 = new Book("Naruto", "Kakashi", 2008, "248-0432236789");
+        Book book2 = new Book("Haikyuu", "Shoyo", 2006, "248-0236594728");
+        libraryController.addBook(book1);
+        libraryController.addBook(book2);
 
-        libraryStorage.bubbleSortByYear();
+        // Menu
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Hiển thị sách");
+            System.out.println("2. Thêm sách");
+            System.out.println("3. Sửa sách");
+            System.out.println("4. Xóa sách");
+            System.out.println("5. Tìm kiếm sách");
+            System.out.println("6. Sắp xếp sách theo năm");
+            System.out.println("7. Lưu dữ liệu");
+            System.out.println("8. Thoát");
+            System.out.print("Chọn một chức năng: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Clear buffer
 
-        System.out.println("Danh sách tài liệu sau khi sắp xếp theo năm:");
-        for (Document doc : libraryStorage.searchByTitle("")) {
-            System.out.println(doc.getTitle() + " - " + doc.getYear());
-        }
-
-        List<Document> searchResults = libraryStorage.searchByTitle(keyword);
-        System.out.println("\nKết quả tìm kiếm cho từ khóa: \"" + keyword + "\":");
-        if (searchResults.isEmpty()) {
-            System.out.println("Không tìm thấy tài liệu nào.");
-        } else {
-            for (Document doc : searchResults) {
-                System.out.println(doc.getTitle() + " - " + doc.getYear());
+            switch (choice) {
+                case 1:
+                    libraryController.displayBooks();
+                    break;
+                case 2:
+                    libraryController.addBookFromInput(scanner);
+                    break;
+                case 3:
+                    libraryController.updateBookFromInput(scanner);
+                    break;
+                case 4:
+                    libraryController.deleteBookFromInput(scanner);
+                    break;
+                case 5:
+                    libraryController.searchBooksFromInput(scanner);
+                    break;
+                case 6:
+                    libraryController.sortBooksByYear();
+                    break;
+                case 7:
+                    libraryController.saveData("libraryData.bin");
+                    break;
+                case 8:
+                    System.out.println("Thoát chương trình.");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
             }
         }
-
-        libraryStorage.saveData("libraryData.bin");
-
-        scanner.close();
     }
 }
