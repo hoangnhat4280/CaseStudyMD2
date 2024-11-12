@@ -8,11 +8,13 @@ public class LibraryController {
     private static LibraryController instance;
     private LibraryStorage storage;
 
+    // Constructor private để ngăn tạo đối tượng từ bên ngoài
     private LibraryController() {
         storage = LibraryStorage.getInstance();
     }
 
-    public static LibraryController getInstance() {
+    // Synchronized để đảm bảo chỉ có một instance trong môi trường đa luồng
+    public static synchronized LibraryController getInstance() {
         if (instance == null) {
             instance = new LibraryController();
         }
@@ -27,3 +29,4 @@ public class LibraryController {
         return storage.searchByTitle(title);
     }
 }
+

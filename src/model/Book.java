@@ -8,7 +8,19 @@ public class Book extends Document {
         this.isbn = isbn;
     }
 
-    // Getters and Setters
-    public String getIsbn() { return isbn; }
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Book{");
+        sb.append("isbn='").append(isbn).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

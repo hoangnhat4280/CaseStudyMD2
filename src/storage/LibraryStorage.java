@@ -14,7 +14,7 @@ public class LibraryStorage {
         documents = new ArrayList<>();
     }
 
-    public static LibraryStorage getInstance() {
+    public static synchronized LibraryStorage getInstance() {
         if (instance == null) {
             instance = new LibraryStorage();
         }
@@ -41,7 +41,6 @@ public class LibraryStorage {
         for (int i = 0; i < documents.size() - 1; i++) {
             for (int j = 0; j < documents.size() - i - 1; j++) {
                 if (documents.get(j).getYear() > documents.get(j + 1).getYear()) {
-                    // Hoán đổi
                     Document temp = documents.get(j);
                     documents.set(j, documents.get(j + 1));
                     documents.set(j + 1, temp);
@@ -53,6 +52,16 @@ public class LibraryStorage {
     public void saveToBinaryFile(String filename) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(documents);
+        }
+    }
+
+    // Phương thức mới để lưu dữ liệu với xử lý ngoại lệ
+    public void saveData(String filename) {
+        try {
+            saveToBinaryFile(filename);
+            System.out.println("Data has save to " + filename);
+        } catch (IOException e) {
+            System.err.println("Error saving data: " + e.getMessage());
         }
     }
 
