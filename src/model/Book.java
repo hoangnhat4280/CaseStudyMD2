@@ -5,15 +5,20 @@ public class Book {
     private String author;
     private int year;
     private String isbn;
+    private BookLoan loanStatus;
 
     public Book(String title, String author, int year, String isbn) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.isbn = isbn;
+        this.loanStatus = new BookLoan();
     }
 
-    // Getters và Setters
+    public BookLoan getLoanStatus() {
+        return loanStatus;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -53,6 +58,7 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", year=" + year +
                 ", isbn='" + isbn + '\'' +
+                ", borrowed=" + loanStatus.isBorrowed() +
                 '}';
     }
 }

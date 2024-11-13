@@ -1,6 +1,7 @@
 package storage;
 
 import model.Book;
+import model.Member;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class LibraryStorage {
         }
     }
 
+
     // Lưu dữ liệu vào file nhị phân
     public void saveToBinaryFile(String filename) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -73,12 +75,15 @@ public class LibraryStorage {
             System.err.println("Error saving data: " + e.getMessage());
         }
     }
+}
 
 
-    // Tải dữ liệu từ file nhị phân
+
+
+
+
+// Tải dữ liệu từ file nhị phân
 //    public void loadFromBinaryFile(String filename) throws IOException, ClassNotFoundException {
 //        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
 //            books = (List<Book>) ois.readObject();
 //        }
-//    }
-}

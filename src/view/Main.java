@@ -2,6 +2,7 @@ package view;
 
 import controller.LibraryController;
 import model.Book;
+import model.Member;
 import java.util.Scanner;
 
 public class Main {
@@ -9,13 +10,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         LibraryController libraryController = LibraryController.getInstance();
 
-        // Thêm sách mẫu
-        Book book1 = new Book("Naruto", "Kakashi", 2008, "248-0432236789");
-        Book book2 = new Book("Haikyuu", "Shoyo", 2006, "248-0236594728");
+        Book book1 = new Book("Naruto", "Kakashi", 2008, "2408");
+        Book book2 = new Book("Haikyuu", "Shoyo", 2006, "2412");
         libraryController.addBook(book1);
         libraryController.addBook(book2);
 
-        // Menu
+
+
         while (true) {
             System.out.println("\nMenu:");
             System.out.println("1. Hiển thị sách");
@@ -26,9 +27,13 @@ public class Main {
             System.out.println("6. Sắp xếp sách theo năm");
             System.out.println("7. Lưu dữ liệu");
             System.out.println("8. Thoát");
-            System.out.print("Chọn một chức năng: ");
+            System.out.println("9. Thêm thành viên");
+            System.out.println("10. Mượn sách cho thành viên");
+            System.out.println("11. Trả sách từ thành viên");
+            System.out.println("12. Hiển thị thành viên");
+            System.out.print("Vui lòng chọn chức năng: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Clear buffer
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -56,6 +61,18 @@ public class Main {
                     System.out.println("Thoát chương trình.");
                     scanner.close();
                     return;
+                case 9:
+                    libraryController.addMemberFromInput(scanner);
+                    break;
+                case 10:
+                    libraryController.borrowBookForMember(scanner);
+                    break;
+                case 11:
+                    libraryController.returnBookFromMember(scanner);
+                    break;
+                case 12:
+                    libraryController.displayMembers();
+                    break;
                 default:
                     System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
             }
