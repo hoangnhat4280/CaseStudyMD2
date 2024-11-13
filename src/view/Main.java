@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         LibraryController libraryController = LibraryController.getInstance();
-
+        
         Book book1 = new Book("Naruto", "Kakashi", 2008, "2408");
         Book book2 = new Book("Haikyuu", "Shoyo", 2006, "2412");
         libraryController.addBook(book1);

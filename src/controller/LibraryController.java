@@ -4,6 +4,8 @@ import model.Book;
 import model.Member;
 import model.LoanRecord;
 import storage.LibraryStorage;
+import storage.CsvReaderExample;
+import storage.CsvWriterExample;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,6 @@ public class LibraryController {
         return instance;
     }
 
-    // Thêm sách
     public void addBook(Book book) {
         storage.addBook(book);
     }
@@ -253,6 +254,24 @@ public class LibraryController {
         System.out.println("Không tìm thấy sách với ISBN này.");
     }
 
+
+    // Phương thức để load sách từ file CSV
+    public void loadBooksFromCsv(String fileName) {
+        CsvReaderExample csvReader = CsvReaderExample.getInstance();
+        List<Book> books = csvReader.readBooksFile(fileName);
+        // Thêm sách vào storage sau khi đã đọc từ CSV
+        for (Book book : books) {
+            storage.addBook(book);
+        }
+        System.out.println("Sách đã được tải từ file " + fileName);
+    }
+
+    // Phương thức để lưu sách vào file CSV
+    public void saveBooksData(String fileName) {
+        CsvWriterExample csvWriter = new CsvWriterExample();
+        List<Book> books = storage.getBooks();
+        csvWriter.writeBooksFile(fileName, books);
+    }
 
 
 }

@@ -1,7 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-
 public class LoanRecord {
     private Member member;
     private Book book;
